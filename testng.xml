@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  TestNG Suite for running API Automation using Rest Assured + Karate
+  Includes:
+  - Allure TestNG Listener
+  - Segregated test blocks for CRUD, Data-Driven, and Karate executions
+  - Option to enable parallel execution explained below
+-->
+
+<suite name="API Automation Suite" parallel="false" thread-count="1" verbose="1">
+
+    <!-- Allure reporting listener for TestNG -->
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
+
+    <!-- Block 1: REST Assured CRUD Tests (POST, PUT, PATCH, DELETE) -->
+    <test name="Reqres User CRUD Tests">
+        <classes>
+            <class name="reqres.tests.UserCrudTests"/>
+        </classes>
+    </test>
+
+    <!-- Block 2: REST Assured Data-Driven Tests (CSV, CLI input) -->
+    <test name="Reqres Data-Driven Tests">
+        <classes>
+            <class name="reqres.tests.UserDataDrivenTests"/>
+        </classes>
+    </test>
+
+    <!-- Block 3: Karate feature execution via wrapper class -->
+    <test name="Karate Booking Features">
+        <classes>
+            <class name="runners.KarateBookingTestWrapper"/>
+        </classes>
+    </test>
+
+</suite>
